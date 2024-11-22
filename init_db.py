@@ -12,7 +12,7 @@ def initialize_database():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
-    # Define the outages table
+    # Define the outages table with the additional company and planned columns
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS outages (
             id TEXT PRIMARY KEY,
@@ -25,7 +25,9 @@ def initialize_database():
             longitude REAL,
             dateOff TEXT,
             crewEta TEXT,
-            polygon TEXT
+            polygon TEXT,
+            company TEXT,
+            planned BOOLEAN DEFAULT 0
         )
     """)
     
@@ -35,5 +37,4 @@ def initialize_database():
 
 if __name__ == "__main__":
     initialize_database()
-
 
